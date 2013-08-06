@@ -87,8 +87,11 @@ if(require.main == module) {
 	.option('-u, --url <url>', 'URL')
 	.parse(process.argv);
 
-    checkHtmlFile("index.html", "checks.json");
-    checkHtmlUrl("http://secret-taiga-2364.herokuapp.com/", "checks.json");
+    if (program.url)
+	checkHtmlUrl(program.url, program.checks);
+    else
+	checkHtmlFile(program.file, program.checks);
+
 
 } else {
     exports.checkHtmlFile = checkHtmlFile;
